@@ -4,13 +4,13 @@
   def initialize(options)
     @id = options[:id]
     @current_floor = 1
-    @destination = nil
+    @destinations = []
     @trips = 0
     @maintenance_mode = false
   end
 
   def add_destination(destination)
-    @destination = destination
+    @destinations.push(destination)
   end
 
   def move_up
