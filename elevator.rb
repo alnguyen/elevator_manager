@@ -1,4 +1,13 @@
- class Elevator
+ # Some additional notes:
+ # - I believe that each elevator should maintain it's own state
+ # (current floor, it's destinations, etc)
+ # - The implementation is currently reading as synchronous
+ # => However, I believe each elevator should be running
+ # => asynchronously.  The reason is that as it's running
+ # => (moving up and down floors), it can receive new instructions
+ # => from the controller.
+
+class Elevator
   attr_reader :current_floor, :destinations, :maintenance_mode, :motion_direction
 
   def initialize(options)
@@ -48,4 +57,4 @@
   def notify_door_status(status)
     ElevatorNotifier.door_change(@id, status)
   end
- end
+end
