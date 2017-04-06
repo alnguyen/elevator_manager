@@ -29,6 +29,8 @@
     @motion_direction = destination > current_floor ? :up : :down
   end
 
+  private
+
   def move_up
     @current_floor += 1
     notify_floor_change
@@ -40,12 +42,10 @@
   end
 
   def notify_floor_change
-    # Notifies that the elevator has reached a new floor
-    # Uses @id and @current_floor to provide enough context for listeners
+    ElevatorNotifier.floor_change(@id, @current_floor)
   end
 
-  def notify_door_status
-    # Notifies that the elevator's doors are opening/closing
-    # Uses @id and __status__ to provide enough context for listeners
+  def notify_door_status(status)
+    ElevatorNotifier.door_change(@id, status)
   end
  end
