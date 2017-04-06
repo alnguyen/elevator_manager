@@ -15,6 +15,7 @@ class ElevatorController
     # Finds elevator, requests
     elevator = elevator_on_floor(source) || elevator_passing(source, destination) || elevator_nearest(source)
     elevator.add_destination(destination) unless elevator.nil?
+    elevator.run
   end
 
   private
@@ -26,10 +27,10 @@ class ElevatorController
   def elevator_passing(source, destination)
     if source > destination
       # Going down
-      @elevators.select{|elevator| !elevator.maintenance_mode && elevator.current_floor > source && elevator.motion_direction == "down"}.first
+      @elevators.select{|elevator| !elevator.maintenance_mode && elevator.current_floor > source && elevator.motion_direction == :down}.first
     else
       # Going up
-      @elevators.select{|elevator| !elevator.maintenance_mode && elevator.current_floor < source && elevator.motion_direction == "up"}.first
+      @elevators.select{|elevator| !elevator.maintenance_mode && elevator.current_floor < source && elevator.motion_direction == :up}.first
     end
   end
 
